@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="vampire">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="使用个性化样式按钮实现文件上传"/>
+  <meta property="og:description" content="blog" />
+  <meta property="og:site_name" content="时光沙漏"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://vampire624.top"/>
+  
+    <link rel="alternate" href="/atom.xml" title="时光沙漏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>时光沙漏</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106015191-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">使用个性化样式按钮实现文件上传</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/vampire624">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:vampire_624@yeah.net">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By vampire</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-09-07</span>
+            <span class="time">11:05:56</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/css/">css</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/css/">#css</a> <a class="tag" href="/tags/js/">#js</a> <a class="tag" href="/tags/html/">#html</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>浏览器自带的<code>&lt;input type=&quot;file&quot;&gt;</code>样式极其丑陋，我对它几乎不能做什么修改，这里使用让其透明的一种方式覆盖在我们样式之上，实现用户点击个性化样式即点击了input标签。</p>
+<a id="more"></a>
+<h2 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h2><p>html部分在<code>body</code>里装上简单的<code>&lt;input type=&quot;file&quot;&gt;</code>，和我们要用的样式的<code>div</code>，大概长这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"upload"</span>&gt;</div><div class="line">	&lt;form action=<span class="string">""</span> enctype=<span class="string">'multipart/form-data'</span>&gt;</div><div class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"file"</span> id=<span class="string">"file"</span> name=<span class="string">"file"</span>&gt;</div><div class="line">	&lt;/form&gt;</div><div class="line">	&lt;div id=<span class="string">"button"</span>&gt;文件上传&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p><code>enctype</code>一定要设置，当然这里没有服务器端，如果有的话只有<code>enctype</code>设置如上才能正常工作。</p>
+<h2 id="css部分"><a href="#css部分" class="headerlink" title="css部分"></a>css部分</h2><p>css部分 重点是设置<code>&lt;input type=&quot;file&quot;&gt;</code>的定位和透明，还有我们个性化上传文件的按钮样式，有一点不要遗漏，那就是父元素要设置<code>overflow</code>为<code>hidden</code>，大概长这样：</p>
+<pre><code>#button{
+    width: 80px;
+    height: 40px;
+    border: 3px solid rgb(191,92,220);
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    font-family: &quot;microsoft yahei&quot;;
+    transition: all 0.2s linear;
+}
+#file{
+    position: absolute;
+    left: -70px;
+    top: -20px;
+    width: 156px;
+    height: 66px;
+    opacity: 0;
+}
+#file,input:hover{
+    cursor: pointer;
+}
+#upload{
+    position: relative;
+    overflow: hidden;
+}
+</code></pre><p>定位让<code>&lt;input type=&quot;file&quot;&gt;</code>的部分内容移出父元素，使用css3动画结合js实现<code>hover</code>样式的变化，通过<code>opacity</code>为0，使<code>&lt;input type=&quot;file&quot;&gt;</code>覆盖在我们的按钮样式之上，用户点击按钮实则点击了<code>&lt;input type=&quot;file&quot;&gt;</code>。</p>
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><p>js主要是为了实现鼠标悬浮时，按钮样式的变化，因为<code>&lt;input type=&quot;file&quot;&gt;</code>的覆盖，无法实现css<code>hover</code>的能力，只能通过js配合来实现样式鼠标悬浮，移入移出的效果变化，大概长这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var file = document.getElementById(<span class="string">"file"</span>)</div><div class="line">var button = document.getElementById(<span class="string">"button"</span>)</div><div class="line">var img = document.getElementById(<span class="string">"img"</span>)</div><div class="line">file.onmouseover = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	button.style.color = <span class="string">"#FFF"</span></div><div class="line">	button.style.backgroundColor = <span class="string">"rgb(192,92,220)"</span></div><div class="line">&#125;</div><div class="line">file.onmouseout = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	button.style.color = <span class="string">"black"</span></div><div class="line">	button.style.backgroundColor = <span class="string">"white"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这种方式有一定的弊端，就是<code>&lt;input type=&quot;file&quot;&gt;</code>覆盖之后，我们按钮样式的<code>hover</code>不能使用，这hen不爽，其实还有一种是设置一个<code>&lt;a&gt;</code>标签，点击之后js生成<code>&lt;input type=&quot;file&quot;&gt;</code>然后出发点击事件，同样可以达到改变其丑陋面貌的目的。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
