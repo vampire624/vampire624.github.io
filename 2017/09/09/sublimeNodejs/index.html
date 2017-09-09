@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="vampire624">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="ubuntu 14.04 LTS 安装sublime text3 配置nodejs开发环境"/>
+  <meta property="og:description" content="blog" />
+  <meta property="og:site_name" content="中娅沙漏"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://vampire624.top"/>
+  
+    <link rel="alternate" href="/atom.xml" title="中娅沙漏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>中娅沙漏</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106015191-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">ubuntu 14.04 LTS 安装sublime text3 配置nodejs开发环境</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/vampire624">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:vampire_624@yeah.net">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By vampire624</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-09-09</span>
+            <span class="time">13:26:07</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/nodejs/">nodejs</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/ubuntu/">#ubuntu</a> <a class="tag" href="/tags/sublime-text3/">#sublime text3</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>ubuntu 14.04 LTS环境下安装sublime text3 配置nodejs开发环境资料比较少，网上大部分都是基于windows平台的，linux下的比较少。</p>
+<a id="more"></a> 
+<h2 id="安装sublime-text3"><a href="#安装sublime-text3" class="headerlink" title="安装sublime text3"></a>安装sublime text3</h2><p>这一步是比较简单的，命令行工具安装，或者直接去<a href="http://www.sublimetext.com/" title="sublime text3" target="_blank" rel="external">sublime text3官网</a>,页面自动呈现为当前系统环境适配版本，点击install for linux，下载安装即可。</p>
+<h2 id="安装-nodejs"><a href="#安装-nodejs" class="headerlink" title="安装 nodejs"></a>安装 nodejs</h2><p>安装nodejs 使用nodejs的版本管理器——nvm，在github上找到nvm，这里<a href="https://github.com/creationix/nvm" title="github nvm" target="_blank" rel="external">nvm</a>,翻到下面在Installation（安装）部分，（前提安装了wget 或者 curl）打开命令行，复制:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash</div></pre></td></tr></table></figure></p>
+<p>然后再复制下一行进去</p>
+<pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm
+</code></pre><p>之后再重开命令窗口，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm --vresion</div></pre></td></tr></table></figure></p>
+<p>查看nvm安装版本，安装成功会显示版本号<br>接下来，我们安装nodejs，在命令行中输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm install v8.4.0</div></pre></td></tr></table></figure>
+<p>v 8.4.0是当前nodejs最新版本，也可以安装不同你想要的版本<br>然后再两行命令让nvm默认使当前nodejs版本:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nvm use v8.4.0</div><div class="line">nvm <span class="built_in">alias</span> default v8.4.0</div></pre></td></tr></table></figure></p>
+<p>命令行键入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div></pre></td></tr></table></figure>
+<p>查看node版本和npm版本，出现版本号即为安装成功。</p>
+<h2 id="安装package-contronl"><a href="#安装package-contronl" class="headerlink" title="安装package contronl"></a>安装package contronl</h2><p>package control是sublime text3的插件神奇，安装各种插件就靠它了，是我们个性化配置我们自己的sublime text3的重要条件。命令行安装比较简单，使用<code>control + ~</code>打开sublime text3的控制台，直接粘贴</p>
+<pre><code>import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
+</code></pre><p>回车即可，很简单，可能有梯子速度会更快些。</p>
+<h2 id="安装sublime-text3-nodejs插件"><a href="#安装sublime-text3-nodejs插件" class="headerlink" title="安装sublime text3 nodejs插件"></a>安装sublime text3 nodejs插件</h2><p>在sublime text3 下使用<code>alt+shift+p</code>调出查找工具窗口，输出<code>package control install</code>,这里有梯子能速度快些，输入<code>nodejs</code>回车即可，安装成功，不成功的话，手动去github上下载包。<br>接下来就是最为关键的一步，修改配置，我在这里跌倒太多次了，不同系统环境配置各不相同，但是都是大同小异的。<br>首先打开shubliem text3上的<code>preference</code>的<code>Browser package</code>,在文件夹<code>nodejs</code>里找到<strong>node.sublime-build</strong>文件，拖入到sublime text3中，修改两处：<br>（1）<br><code>&quot;encoding&quot;: &quot;utf8&quot;</code>修改encoding为编码格式为utf-8，防止编译文件出现乱码。<br>（2）</p>
+<pre><code>&quot;linux&quot;:
+    {
+        &quot;shell_cmd&quot;: &quot;killall node; ~/.nvm/versions/node/v8.4.0/bin/node $file&quot;
+    },
+</code></pre><p>修改shell_cmd,后面的node所在路径为我们安装的路径，如果使用nvm安装的话默认在<code>~/.nvm/versions/node/v8.4.0/bin/node</code>这个路径下，<strong>注意</strong>一定要加根目录<code>~</code>,否则是找不到路径的，（我在这卡了一晚上），保存，然后关闭。</p>
+<p>然后再修改配置用户配置文件，在<code>preference</code>下的<code>package control</code>下选中<code>nodejs</code>,然后打开<code>nodejs.sublime-settings</code>文件，修改node路径和npm路径，把刚才修改<code>node.sublime-build</code>时所用的路径填写进去：</p>
+<pre><code>// e.g. &quot;/usr/bin/node&quot; or &quot;C:\bin\node.exe&quot;
+&quot;node_command&quot;: &quot;~/.nvm/versions/node/v8.4.0/bin/node&quot;,
+// Same for NPM command
+&quot;npm_command&quot;: &quot;~/.nvm/versions/node/v8.4.0/bin/npm&quot;,
+</code></pre><p>这样就大功告成了！</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>编写文件server.js,使用nodejs语法，长这个样子：</p>
+<pre><code>var http = require(&quot;http&quot;)
+var server = http.createServer(function(req,res){
+    res.writeHead(200,{&quot;Content-Type&quot;:&quot;text/plain&quot;})
+    res.write(&quot;hello nodejs!&quot;)
+    res.end()
+})
+server.listen(3000)
+console.log(&quot;the server is running at port 3000&quot;)
+</code></pre><p>然后按下<code>control + B</code>进行编译，编译结果会显示出来<code>the server is running at port 3000</code>,去浏览器输入<code>127.0.0.1:3000</code>就可以看到hello nodejs的字样了。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
