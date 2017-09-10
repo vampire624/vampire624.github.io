@@ -110,8 +110,8 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2017-09-09</span>
-            <span class="time">13:26:07</span>
+            <span class="date">2017-09-10</span>
+            <span class="time">16:24:53</span>
           </span>
           
           <!--  Categories  -->
@@ -147,7 +147,7 @@
 <p>命令行键入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div></pre></td></tr></table></figure>
 <p>查看node版本和npm版本，出现版本号即为安装成功。</p>
-<h2 id="安装package-contronl"><a href="#安装package-contronl" class="headerlink" title="安装package contronl"></a>安装package contronl</h2><p>package control是sublime text3的插件神奇，安装各种插件就靠它了，是我们个性化配置我们自己的sublime text3的重要条件。命令行安装比较简单，使用<code>control + ~</code>打开sublime text3的控制台，直接粘贴</p>
+<h2 id="安装package-contronl"><a href="#安装package-contronl" class="headerlink" title="安装package contronl"></a>安装package contronl</h2><p>package control是sublime text3的插件神器，安装各种插件就靠它了，是我们个性化配置我们自己的sublime text3的重要武器。命令行安装比较简单，使用<code>control + ~</code>打开sublime text3的控制台，直接粘贴</p>
 <pre><code>import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
 </code></pre><p>回车即可，很简单，可能有梯子速度会更快些。</p>
 <h2 id="安装sublime-text3-nodejs插件"><a href="#安装sublime-text3-nodejs插件" class="headerlink" title="安装sublime text3 nodejs插件"></a>安装sublime text3 nodejs插件</h2><p>在sublime text3 下使用<code>alt+shift+p</code>调出查找工具窗口，输出<code>package control install</code>,这里有梯子能速度快些，输入<code>nodejs</code>回车即可，安装成功，不成功的话，手动去github上下载包。<br>接下来就是最为关键的一步，修改配置，我在这里跌倒太多次了，不同系统环境配置各不相同，但是都是大同小异的。<br>首先打开shubliem text3上的<code>preference</code>的<code>Browser package</code>,在文件夹<code>nodejs</code>里找到<strong>node.sublime-build</strong>文件，拖入到sublime text3中，修改两处：<br>（1）<br><code>&quot;encoding&quot;: &quot;utf8&quot;</code>修改encoding为编码格式为utf-8，防止编译文件出现乱码。<br>（2）</p>

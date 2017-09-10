@@ -110,8 +110,8 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2017-09-07</span>
-            <span class="time">13:26:07</span>
+            <span class="date">2017-09-10</span>
+            <span class="time">16:24:53</span>
           </span>
           
           <!--  Categories  -->
@@ -133,7 +133,7 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <p>浏览器自带的<code>&lt;input type=&quot;file&quot;&gt;</code>样式极其丑陋，我对它几乎不能做什么修改，这里使用让其透明的一种方式覆盖在我们样式之上，实现用户点击个性化样式即点击了input标签。</p>
+          <p>浏览器自带的文件上传样式极其丑陋，我们对它几乎不能做什么修改，这里使用让其透明的一种方式覆盖在我们样式之上，实现用户点击个性化样式即点击了input标签。</p>
 <a id="more"></a>
 <h2 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h2><p>html部分在<code>body</code>里装上简单的<code>&lt;input type=&quot;file&quot;&gt;</code>，和我们要用的样式的<code>div</code>，大概长这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"upload"</span>&gt;</div><div class="line">	&lt;form action=<span class="string">""</span> enctype=<span class="string">'multipart/form-data'</span>&gt;</div><div class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"file"</span> id=<span class="string">"file"</span> name=<span class="string">"file"</span>&gt;</div><div class="line">	&lt;/form&gt;</div><div class="line">	&lt;div id=<span class="string">"button"</span>&gt;文件上传&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <p><code>enctype</code>一定要设置，当然这里没有服务器端，如果有的话只有<code>enctype</code>设置如上才能正常工作。</p>
@@ -165,7 +165,7 @@
 }
 </code></pre><p>定位让<code>&lt;input type=&quot;file&quot;&gt;</code>的部分内容移出父元素，使用css3动画结合js实现<code>hover</code>样式的变化，通过<code>opacity</code>为0，使<code>&lt;input type=&quot;file&quot;&gt;</code>覆盖在我们的按钮样式之上，用户点击按钮实则点击了<code>&lt;input type=&quot;file&quot;&gt;</code>。</p>
 <h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><p>js主要是为了实现鼠标悬浮时，按钮样式的变化，因为<code>&lt;input type=&quot;file&quot;&gt;</code>的覆盖，无法实现css<code>hover</code>的能力，只能通过js配合来实现样式鼠标悬浮，移入移出的效果变化，大概长这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var file = document.getElementById(<span class="string">"file"</span>)</div><div class="line">var button = document.getElementById(<span class="string">"button"</span>)</div><div class="line">var img = document.getElementById(<span class="string">"img"</span>)</div><div class="line">file.onmouseover = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	button.style.color = <span class="string">"#FFF"</span></div><div class="line">	button.style.backgroundColor = <span class="string">"rgb(192,92,220)"</span></div><div class="line">&#125;</div><div class="line">file.onmouseout = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	button.style.color = <span class="string">"black"</span></div><div class="line">	button.style.backgroundColor = <span class="string">"white"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这种方式有一定的弊端，就是<code>&lt;input type=&quot;file&quot;&gt;</code>覆盖之后，我们按钮样式的<code>hover</code>不能使用，这hen不爽，其实还有一种是设置一个<code>&lt;a&gt;</code>标签，点击之后js生成<code>&lt;input type=&quot;file&quot;&gt;</code>然后出发点击事件，同样可以达到改变其丑陋面貌的目的。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这种方式有一定的弊端，就是<code>&lt;input type=&quot;file&quot;&gt;</code>覆盖之后，我们按钮样式的<code>hover</code>不能使用，这hen不爽，其实还有一种是设置一个<code>&lt;a&gt;</code>标签，点击之后js生成<code>&lt;input type=&quot;file&quot;&gt;</code>然后触发点击事件，同样可以达到改变其丑陋面貌的目的。</p>
 
         </div>
       </div>

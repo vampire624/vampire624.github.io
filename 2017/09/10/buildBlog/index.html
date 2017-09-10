@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="vampire624">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="如何创建hexo博客"/>
+  <meta property="og:title" content="如何打造hexo博客"/>
   <meta property="og:description" content="blog" />
   <meta property="og:site_name" content="中娅沙漏"/>
   <meta property="og:type" content="article" />
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">如何创建hexo博客</p>
+          <p class="title">如何打造hexo博客</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -110,8 +110,8 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2017-09-07</span>
-            <span class="time">13:26:07</span>
+            <span class="date">2017-09-10</span>
+            <span class="time">16:24:53</span>
           </span>
           
           <!--  Categories  -->
@@ -146,12 +146,12 @@
 <pre><code># Site
 title: 博客名字
 subtitle: blog副标题
-description: 可以使你喜欢的一句话
+description: 可以是你喜欢的一句话
 author: ***
 language: zh-CN
 timezone: Asia/Shanghai
 </code></pre><p>像上面这样，还有很多配置项可以更改，都是一些简单的英文，自己摸索啦。</p>
-<h2 id="部署上线"><a href="#部署上线" class="headerlink" title="部署上线"></a>部署上线</h2><p>下面我们需要部署上线，如果你是学生，其实可以尝试购买<a href="https://www.aliyun.com" title="aliyun" target="_blank" rel="external">aliyun</a>虚拟主机，但是需要一些linux以及服务器的各种配置，但是也是学习的过程了，对于想要马上看到自己博客能够部署上线的同学，那就尝试使用<a href="https://github.com" title="github" target="_blank" rel="external">github</a>，英文网站当然是，所以劳烦多学点英语哇，注册一个账号，新建一个repo， <strong>注意！！！</strong> 重点来了，repo的名字只能是你的github用户名，<code>yourgithubName.github.io</code>,github 能为我们提供page服务，非常轻松，国内的<a href="https://oschina.com" target="_blank" rel="external">码云</a> 也可以提供类似的功能，同学们可以自行百度啦，这样我们就有了一个可以存放我们代码的地方了，起到提供服务器的作用。</p>
+<h2 id="部署上线"><a href="#部署上线" class="headerlink" title="部署上线"></a>部署上线</h2><p>下面我们需要部署上线，如果你是学生，其实可以尝试购买<a href="https://www.aliyun.com" title="aliyun" target="_blank" rel="external">aliyun</a>虚拟主机，但是需要一些linux以及服务器的各种配置，但是也是学习的过程了，对于想要马上看到自己博客能够部署上线的同学，那就尝试使用<a href="https://github.com" title="github" target="_blank" rel="external">github</a>，英文网站当然是，所以劳烦多学点英语哇，注册一个账号，新建一个repo， <strong>注意！！！</strong> 重点来了，repo的名字只能是你的github用户名，<code>yourgithubName.github.io</code>,github 能为我们提供page服务，非常轻松，国内的<a href="https://oschina.com" target="_blank" rel="external">码云</a> 也可以提供类似的功能（但是没有CNAME域名服务，国内环境），同学们可以自行百度啦，这样我们就有了一个可以存放我们代码的地方了，起到提供服务器的作用。</p>
 <p>接下来，我们需要在开始的配置文件<code>_config.yml</code>中修改和添加最下面一行：</p>
 <pre><code># Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -159,15 +159,15 @@ deploy:
     type: git
     repo: https://github.com/yourgithubName/yourgithubName.github.io.git
     branch: master
-</code></pre><p>修改后和上面一直，要把自己的github名字换掉！<br>接下来，需要安装一个部署工具，在根目录下执行：</p>
+</code></pre><p>修改后和上面一样，要把自己的github名字换掉！<br>接下来，需要安装一个部署工具，在根目录下执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 <p>这样就可以开始正式部署blog了，想想都有些小激动呢.-.</p>
 <h4 id="同样三步走，首先执行："><a href="#同样三步走，首先执行：" class="headerlink" title="同样三步走，首先执行："></a>同样三步走，首先执行：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
 <h4 id="其次："><a href="#其次：" class="headerlink" title="其次："></a>其次：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
 <h4 id="最后："><a href="#最后：" class="headerlink" title="最后："></a>最后：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>这样就大功告成了，访问<code>yourgithubName.github.io</code>就可以看到刚才在本地的项目了！但是确实在互联网上！而不是你的本地。</p>
+<p>这样就大功告成了，访问<code>yourgithubName.github.io</code>就可以看到刚才在本地的项目了！但是却是在互联网上！而不是你的本地。</p>
 <p>最后我们需要写自己的博客要怎么样呢？那就在根目录下的<code>/source/_posts/</code>里面添加新的md文件，md是Markdown文件的拓展名，至于格式，so easy，常用就那么几个，搜索一下就好了。添加md文件之后就是你博客的新文章啦，然后在再执行上面部署的三步走，就可以更新你的博客了。</p>
-<h4 id="写在最后："><a href="#写在最后：" class="headerlink" title="写在最后："></a>写在最后：</h4><p>还可以在这个基础上添加你自己的dns域名，和更换blog的主题，感兴趣的同学自己研究一下哇。</p>
+<h4 id="写在最后："><a href="#写在最后：" class="headerlink" title="写在最后："></a>写在最后：</h4><p>还可以在这个基础上添加你自己的dns域名（使用码云的请忽略），和更换blog的主题，感兴趣的同学自己研究一下哇。</p>
 
         </div>
       </div>
