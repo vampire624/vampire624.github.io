@@ -111,7 +111,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2017-09-07</span>
-            <span class="time">22:16:28</span>
+            <span class="time">17:46:21</span>
           </span>
           
           <!--  Categories  -->
@@ -135,8 +135,14 @@
         <div class="post-content">
           <p>浏览器自带的文件上传样式极其丑陋，我们对它几乎不能做什么修改，这里使用让其透明的一种方式覆盖在我们样式之上，实现用户点击个性化样式即点击了input标签。</p>
 <a id="more"></a>
-<h2 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h2><p>html部分在<code>body</code>里装上简单的<code>&lt;input type=&quot;file&quot;&gt;</code>，和我们要用的样式的<code>div</code>，大概长这样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"upload"</span>&gt;</div><div class="line">	&lt;form action=<span class="string">""</span> enctype=<span class="string">'multipart/form-data'</span>&gt;</div><div class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"file"</span> id=<span class="string">"file"</span> name=<span class="string">"file"</span>&gt;</div><div class="line">	&lt;/form&gt;</div><div class="line">	&lt;div id=<span class="string">"button"</span>&gt;文件上传&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p><code>enctype</code>一定要设置，当然这里没有服务器端，如果有的话只有<code>enctype</code>设置如上才能正常工作。</p>
+<h2 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h2><p>html部分在<code>body</code>里装上简单的<code>&lt;input type=&quot;file&quot;&gt;</code>，和我们要用的样式的<code>div</code>，大概长这样：</p>
+<pre><code>&lt;div id=&quot;upload&quot;&gt;
+    &lt;form action=&quot;&quot; enctype=&apos;multipart/form-data&apos;&gt;
+        &lt;input type=&quot;file&quot; id=&quot;file&quot; name=&quot;file&quot;&gt;
+    &lt;/form&gt;
+    &lt;div id=&quot;button&quot;&gt;文件上传&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p><code>enctype</code>一定要设置，当然这里没有服务器端，如果有的话只有<code>enctype</code>设置如上才能正常工作。</p>
 <h2 id="css部分"><a href="#css部分" class="headerlink" title="css部分"></a>css部分</h2><p>css部分 重点是设置<code>&lt;input type=&quot;file&quot;&gt;</code>的定位和透明，还有我们个性化上传文件的按钮样式，有一点不要遗漏，那就是父元素要设置<code>overflow</code>为<code>hidden</code>，大概长这样：</p>
 <pre><code>#button{
     width: 80px;

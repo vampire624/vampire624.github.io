@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="vampire624">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="使用Express 框架multer 实现文件上传功能"/>
+  <meta property="og:description" content="blog" />
+  <meta property="og:site_name" content="中娅沙漏"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://vampire624.top"/>
+  
+    <link rel="alternate" href="/atom.xml" title="中娅沙漏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>中娅沙漏</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106015191-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">使用Express 框架multer 实现文件上传功能</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/vampire624">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:vampire_624@yeah.net">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By vampire624</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-09-13</span>
+            <span class="time">17:46:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/nodejs/">nodejs</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/express/">#express</a> <a class="tag" href="/tags/multer/">#multer</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>nodejs中使用express框架实现前端表单文件提交，后端获取表单信息与文件本身，在express3.×的中间件自带的情况下使用body-parser可以实现，在express4.0之后，中间件需要独立加载，新的中间件multer成为首选。</p>
+<a id="more"></a> 
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>前端使用建议<code>form</code>表单，action为提交表单地址，method设置提交方式，这里使用POST，最重要的一点：<br><strong>一定要设置<code>enctype</code>属性，属性值为<code>multipart/form-data</code></strong><br>表单的html代码长这个样子：</p>
+<pre><code>&lt;form action=&quot;./submit&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; placeholder=&quot;name&quot;&gt;
+    &lt;input type=&quot;text&quot; name=gender placeholder=&quot;gender&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;age&quot; placeholder=&quot;age&quot;&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;male
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;female
+    &lt;input type=&quot;checkbox&quot; name=&quot;friut1&quot;&gt;friut1
+    &lt;input type=&quot;checkbox&quot; name=&quot;friut2&quot;&gt;friut2
+    &lt;input type=&quot;checkbox&quot; name=&quot;friut3&quot;&gt;friut3
+    &lt;input type=&quot;file&quot; mutiple=&quot;multiple&quot; name=&quot;myFile&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre><h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><p>nodejs使用express框架，以便使用其multer中间件。<br>首先引入相关模块：</p>
+<pre><code>var express = require(&quot;express&quot;),app = express(),multer = require(&quot;multer&quot;),http = require(&quot;http&quot;),fs = require(&quot;fs&quot;)
+</code></pre><p>其中express 和 multer需要<code>npm</code>独立安装，引入<code>fs</code>模块处理文件上传。<br>接下来，构建服务器，监听3000端口，get请求根路径指向表单所在index.html。</p>
+<pre><code>app.listen(process.env.PORT || 3000)
+app.use(&quot;/&quot;,express.static(__dirname ))
+console.log(&quot;server start at port 3000...&quot;)
+</code></pre><p>接下来就是处理post请求，在回调函数中引入multer的中间件，这样回调函数的<code>request</code>参数（简写req）的属性就加载了body和file属性：</p>
+<pre><code>app.post(&quot;/submit&quot;,multer({dest:&quot;./upload/&quot;}).single(&quot;myFile&quot;),function(req,res){
+    console.log(req.file)
+    console.log(req.body)
+    var tempPath = req.file.path
+    var targetPath = &quot;./upload/&quot; + req.file.originalname
+    var readStream = fs.createReadStream(tempPath)
+    var writeStream = fs.createWriteStream(targetPath)
+    readStream.pipe(writeStream)
+    fs.unlinkSync(tempPath)//删除文件（同步）
+    res.writeHead(200,{
+    &quot;Content-Type&quot;:&quot;text/html;charset=&apos;utf-8&apos;&quot;
+    })
+    res.write(&quot;&lt;h1&gt;上传成功！&lt;/h1&gt;&quot;)
+    res.end()
+})
+</code></pre><p>app的post方法中第一个参数是post请求的地址，第二个参数加载multer中间件，其中参数对象设置上传文件的临时地址路径，采用其single方法实现单文件上传，single方法的参数字符串为前端表单的<code>&lt;input type=&quot;file&quot;&gt;</code>的name属性值，这里是“myFile”，然后分别打印req请求体中的body和file属性，通过fs的读流和写流实现文件操作，最后将临时上传地址路径上的文件使用unlinkSync方法删除，最后返回状态码200，和操作成功的信息。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
