@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="vampire624">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="使用 Express 框架 multer 实现文件上传功能"/>
+  <meta property="og:title" content="nodeJS 使用第三方 Api 实现短信验证码功能"/>
   <meta property="og:description" content="blog" />
   <meta property="og:site_name" content="zhonya&#39;s Hourglass"/>
   <meta property="og:type" content="article" />
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">使用 Express 框架 multer 实现文件上传功能</p>
+          <p class="title">nodeJS 使用第三方 Api 实现短信验证码功能</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -110,7 +110,7 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2017-09-13</span>
+            <span class="date">2017-09-18</span>
             <span class="time">15:37:38</span>
           </span>
           
@@ -126,51 +126,44 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/express/">#express</a> <a class="tag" href="/tags/multer/">#multer</a>
+<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/api/">#api</a> <a class="tag" href="/tags/sms/">#sms</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <p>nodejs中使用express框架实现前端表单文件提交，后端获取表单信息与文件本身，在express3.×的中间件自带的情况下使用body-parser可以实现，在express4.0之后，中间件需要独立加载，新的中间件multer成为首选。</p>
-<a id="more"></a> 
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>前端使用建议<code>form</code>表单，action为提交表单地址，method设置提交方式，这里使用POST，最重要的一点：<br><strong>一定要设置<code>enctype</code>属性，属性值为<code>multipart/form-data</code></strong><br>表单的html代码长这个样子：</p>
-<pre><code>&lt;form action=&quot;./submit&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-    &lt;input type=&quot;text&quot; name=&quot;name&quot; placeholder=&quot;name&quot;&gt;
-    &lt;input type=&quot;text&quot; name=gender placeholder=&quot;gender&quot;&gt;
-    &lt;input type=&quot;text&quot; name=&quot;age&quot; placeholder=&quot;age&quot;&gt;
-    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;male
-    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;female
-    &lt;input type=&quot;checkbox&quot; name=&quot;friut1&quot;&gt;friut1
-    &lt;input type=&quot;checkbox&quot; name=&quot;friut2&quot;&gt;friut2
-    &lt;input type=&quot;checkbox&quot; name=&quot;friut3&quot;&gt;friut3
-    &lt;input type=&quot;file&quot; mutiple=&quot;multiple&quot; name=&quot;myFile&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;
-&lt;/form&gt;
-</code></pre><h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><p>nodejs使用express框架，以便使用其multer中间件。<br>首先引入相关模块：</p>
-<pre><code>var express = require(&quot;express&quot;),app = express(),multer = require(&quot;multer&quot;),http = require(&quot;http&quot;),fs = require(&quot;fs&quot;)
-</code></pre><p>其中express 和 multer需要<code>npm</code>独立安装，引入<code>fs</code>模块处理文件上传。<br>接下来，构建服务器，监听3000端口，get请求根路径指向表单所在index.html。</p>
-<pre><code>app.listen(process.env.PORT || 3000)
-app.use(&quot;/&quot;,express.static(__dirname ))
-console.log(&quot;server start at port 3000...&quot;)
-</code></pre><p>接下来就是处理post请求，在回调函数中引入multer的中间件，这样回调函数的<code>request</code>参数（简写req）的属性就加载了body和file属性：</p>
-<pre><code>app.post(&quot;/submit&quot;,multer({dest:&quot;./upload/&quot;}).single(&quot;myFile&quot;),function(req,res){
-    console.log(req.file)
-    console.log(req.body)
-    var tempPath = req.file.path
-    var targetPath = &quot;./upload/&quot; + req.file.originalname
-    var readStream = fs.createReadStream(tempPath)
-    var writeStream = fs.createWriteStream(targetPath)
-    readStream.pipe(writeStream)
-    fs.unlinkSync(tempPath)//删除文件（同步）
-    res.writeHead(200,{
-    &quot;Content-Type&quot;:&quot;text/html;charset=&apos;utf-8&apos;&quot;
-    })
-    res.write(&quot;&lt;h1&gt;上传成功！&lt;/h1&gt;&quot;)
-    res.end()
+          <p>在大部分的webApp和app在登录或者注册的时候都使用短信验证码的功能，一般小型网站后端或者个人开发的app不可能重新开发自己的sms短信验证码服务，大多采用第三方集成的sdk，本文使用阿里云通信实现nodejs后端短信验证码的功能。<br><a id="more"></a> </p>
+<h2 id="注册阿里云"><a href="#注册阿里云" class="headerlink" title="注册阿里云"></a>注册阿里云</h2><p>首先需要注册阿里云的账户，一般使用淘宝账号即可，进入控制台短信服务，开通短信服务功能，前身为阿里大鱼，注册时采会送10元的代金券，一条短信4.5分，价格还算公道。</p>
+<h2 id="编辑短信签名"><a href="#编辑短信签名" class="headerlink" title="编辑短信签名"></a>编辑短信签名</h2><p>进入短信签名，填写短信签名（短信方括号里面的内容），提交审核，大概10分钟就审核通过了，很快。</p>
+<h2 id="编辑短信模板"><a href="#编辑短信模板" class="headerlink" title="编辑短信模板"></a>编辑短信模板</h2><p>进入短信模板，填写短信模板内容，其中变量名以${<em>*</em>}表示，例如”您的短信验证码为：<code>${code}</code>“，提交审核，大概也是10分钟就审核通过了，也很快。</p>
+<h2 id="创建阿里云平台秘钥"><a href="#创建阿里云平台秘钥" class="headerlink" title="创建阿里云平台秘钥"></a>创建阿里云平台秘钥</h2><p>进入秘钥管理中心，创建秘钥，可以获取账号的Access Key的id和secret，方便我们nodejs后端使用。</p>
+<h2 id="nodejs测试"><a href="#nodejs测试" class="headerlink" title="nodejs测试"></a>nodejs测试</h2><p>创建app.js,样子长这样：</p>
+<pre><code>const SMSClient = require(&apos;@alicloud/sms-sdk&apos;)
+
+//根据实际申请的账号信息进行替换accessKeyId和secretAccessKey
+const accessKeyId = &apos;LTAIoIA57UVyHeLn&apos;
+const secretAccessKey = &apos;fqoEMuQs0Fx9QUHJKKVxg9MzNBKftT&apos;
+
+//初始化sms_client
+let smsClient = new SMSClient({accessKeyId, secretAccessKey})
+
+//发送短信
+smsClient.sendSMS({
+    PhoneNumbers: &apos;phone-number&apos;,
+    SignName: &apos;×××&apos;,
+    TemplateCode: &apos;SMS_00000000&apos;,
+    TemplateParam: &apos;{&quot;code&quot;:&quot;10086&quot;}&apos;
+}).then(function (res) {
+    let {Code}=res
+    if (Code === &apos;OK&apos;) {
+        //处理返回参数
+        console.log(res)
+    }
+}, function (err) {
+    console.log(err)
 })
-</code></pre><p>app的post方法中第一个参数是post请求的地址，第二个参数加载multer中间件，其中参数对象设置上传文件的临时地址路径，采用其single方法实现单文件上传，single方法的参数字符串为前端表单的<code>&lt;input type=&quot;file&quot;&gt;</code>的name属性值，这里是“myFile”，然后分别打印req请求体中的body和file属性，通过fs的读流和写流实现文件操作，最后将临时上传地址路径上的文件使用unlinkSync方法删除，最后返回状态码200，和操作成功的信息。</p>
+</code></pre><p>解释一下上面的代码，首先引入阿里云的sms服务的nodejs sdk，然后声明两个变量存储你的Access key和Access secret，实例化一个smsClient，把以上两变量通过对象传入，最后调用sendSMS方法，该方法接受两个参数，第一和是需要发送验证码短信的一些相关信息，全部以字符串传入，第二个参数是一个回调函数，这里采用promise对象的then方法，效果一致，成功打印response信息，失败打印error信息。<br>经过测试，运行以上appjs 控制台打印成功ok，手机收到之前填写的模板内容和签名短信，速度很快大概3秒吧。</p>
 
         </div>
       </div>
