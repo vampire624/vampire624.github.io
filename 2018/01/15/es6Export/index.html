@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="vampire624">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="nodeJS 使用第三方 Api 实现短信验证码功能"/>
+  <meta property="og:title" content="ES6：export default 和 export 区别"/>
   <meta property="og:description" content="blog" />
   <meta property="og:site_name" content="zhonya&#39;s Hourglass"/>
   <meta property="og:type" content="article" />
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">nodeJS 使用第三方 Api 实现短信验证码功能</p>
+          <p class="title">ES6：export default 和 export 区别</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -110,7 +110,7 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2017-09-18</span>
+            <span class="date">2018-01-15</span>
             <span class="time">10:41:33</span>
           </span>
           
@@ -126,44 +126,43 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/api/">#api</a> <a class="tag" href="/tags/sms/">#sms</a>
+<a class="tag" href="/tags/es6/">#es6</a> <a class="tag" href="/tags/nodejs/">#nodejs</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <p>在大部分的webApp和app在登录或者注册的时候都使用短信验证码的功能，一般小型网站后端或者个人开发的app不可能重新开发自己的sms短信验证码服务，大多采用第三方集成的sdk，本文使用阿里云通信实现nodejs后端短信验证码的功能。<br><a id="more"></a> </p>
-<h2 id="注册阿里云"><a href="#注册阿里云" class="headerlink" title="注册阿里云"></a>注册阿里云</h2><p>首先需要注册阿里云的账户，一般使用淘宝账号即可，进入控制台短信服务，开通短信服务功能，前身为阿里大鱼，注册时采会送10元的代金券，一条短信4.5分，价格还算公道。</p>
-<h2 id="编辑短信签名"><a href="#编辑短信签名" class="headerlink" title="编辑短信签名"></a>编辑短信签名</h2><p>进入短信签名，填写短信签名（短信方括号里面的内容），提交审核，大概10分钟就审核通过了，很快。</p>
-<h2 id="编辑短信模板"><a href="#编辑短信模板" class="headerlink" title="编辑短信模板"></a>编辑短信模板</h2><p>进入短信模板，填写短信模板内容，其中变量名以${<em>*</em>}表示，例如”您的短信验证码为：<code>${code}</code>“，提交审核，大概也是10分钟就审核通过了，也很快。</p>
-<h2 id="创建阿里云平台秘钥"><a href="#创建阿里云平台秘钥" class="headerlink" title="创建阿里云平台秘钥"></a>创建阿里云平台秘钥</h2><p>进入秘钥管理中心，创建秘钥，可以获取账号的Access Key的id和secret，方便我们nodejs后端使用。</p>
-<h2 id="nodejs测试"><a href="#nodejs测试" class="headerlink" title="nodejs测试"></a>nodejs测试</h2><p>创建app.js,样子长这样：</p>
-<pre><code>const SMSClient = require(&apos;@alicloud/sms-sdk&apos;)
+          <p>es6使用过程中，导出和导入模块时使用export与export default的区别。</p>
+<a id="more"></a> 
+<h1 id="export-和-export-default的区别"><a href="#export-和-export-default的区别" class="headerlink" title="export 和 export default的区别"></a>export 和 export default的区别</h1><h3 id="1-export与export-default均可用于导出常量、函数、文件、模块等"><a href="#1-export与export-default均可用于导出常量、函数、文件、模块等" class="headerlink" title="1.export与export default均可用于导出常量、函数、文件、模块等"></a>1.export与export default均可用于导出常量、函数、文件、模块等</h3><h3 id="2-你可以在其它文件或模块中通过import-常量-函数-文件-模块-名的方式，将其导入，以便能够对其进行使用"><a href="#2-你可以在其它文件或模块中通过import-常量-函数-文件-模块-名的方式，将其导入，以便能够对其进行使用" class="headerlink" title="2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用"></a>2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用</h3><h3 id="3-在一个文件或模块中，export、import可以有多个，export-default仅有一个"><a href="#3-在一个文件或模块中，export、import可以有多个，export-default仅有一个" class="headerlink" title="3.在一个文件或模块中，export、import可以有多个，export default仅有一个"></a>3.在一个文件或模块中，export、import可以有多个，export default仅有一个</h3><h3 id="4-通过export方式导出，在导入时要加-，export-default则不需要"><a href="#4-通过export方式导出，在导入时要加-，export-default则不需要" class="headerlink" title="4.通过export方式导出，在导入时要加{ }，export default则不需要"></a>4.通过export方式导出，在导入时要加{ }，export default则不需要</h3><pre><code>1.export
+//a.js
+export const str = &quot;blablabla~&quot;;
+export function log(sth) { 
+    return sth;
+}
+对应的导入方式：
+//b.js
+import { str, log } from &apos;a&apos;; //也可以分开写两次，导入的时候带花括号
 
-//根据实际申请的账号信息进行替换accessKeyId和secretAccessKey
-const accessKeyId = &apos;LTAIoIA57UVyHeLn&apos;
-const secretAccessKey = &apos;fqoEMuQs0Fx9QUHJKKVxg9MzNBKftT&apos;
-
-//初始化sms_client
-let smsClient = new SMSClient({accessKeyId, secretAccessKey})
-
-//发送短信
-smsClient.sendSMS({
-    PhoneNumbers: &apos;phone-number&apos;,
-    SignName: &apos;×××&apos;,
-    TemplateCode: &apos;SMS_00000000&apos;,
-    TemplateParam: &apos;{&quot;code&quot;:&quot;10086&quot;}&apos;
-}).then(function (res) {
-    let {Code}=res
-    if (Code === &apos;OK&apos;) {
-        //处理返回参数
-        console.log(res)
-    }
-}, function (err) {
-    console.log(err)
-})
-</code></pre><p>解释一下上面的代码，首先引入阿里云的sms服务的nodejs sdk，然后声明两个变量存储你的Access key和Access secret，实例化一个smsClient，把以上两变量通过对象传入，最后调用sendSMS方法，该方法接受两个参数，第一和是需要发送验证码短信的一些相关信息，全部以字符串传入，第二个参数是一个回调函数，这里采用promise对象的then方法，效果一致，成功打印response信息，失败打印error信息。<br>经过测试，运行以上appjs 控制台打印成功ok，手机收到之前填写的模板内容和签名短信，速度很快大概3秒吧。</p>
+2.export default
+//a.js
+const str = &quot;blablabla~&quot;;
+export default str;
+对应的导入方式：
+//b.js
+import str from &apos;a&apos;; 
+//导入的时候没有花括号
+</code></pre><h2 id="使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"><a href="#使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名" class="headerlink" title="使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"></a>使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名</h2><pre><code>//a.js
+let sex = &quot;boy&quot;;
+export default sex（sex不能加大括号）
+//原本直接export sex外部是无法识别的，加上default就可以了.但是一个文件内最多只能有一个export default。其实此处相当于为sex变量值&quot;boy&quot;起了一个系统默认的变量名default，自然default只能有一个值，所以一个文件内不能有多个export default。
+// b.js
+import any from &quot;./a.js&quot;
+import any12 from &quot;./a.js&quot; 
+console.log(any,any12)   //boy,boy
+//本质上，a.js文件的export default输出一个叫做default的变量，然后系统允许你为它取任意名字。所以可以为import的模块起任何变量名，且不需要用大括号包含
+</code></pre><h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>export 和 export defult 困扰了我很久，今天总算是搞清楚了。啊哦。</p>
 
         </div>
       </div>
