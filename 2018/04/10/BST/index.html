@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="vampire624">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="搜索二叉树（BST）"/>
+  <meta property="og:description" content="blog" />
+  <meta property="og:site_name" content="zhonya&#39;s Hourglass"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://vampire624.top"/>
+  
+    <link rel="alternate" href="/atom.xml" title="zhonya&#39;s Hourglass" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>zhonya's Hourglass</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106015191-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">搜索二叉树（BST）</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/vampire624">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:vampire_624@yeah.net">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By vampire624</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-04-10</span>
+            <span class="time">11:38:15</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/数据结构与算法/">数据结构与算法</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/js/">#js</a> <a class="tag" href="/tags/数据结构/">#数据结构</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>搜索二叉树（BST）可以是一颗空树，若其左子树不为空，则左子树上所有节点均小于或者等于它的根节点的值，若其右子树不为空，则右子树上所有节点均大于或者等于它的根节点的值，左右子树叶分别为搜索二叉树。</p>
+<a id="more"></a> 
+<h1 id="搜索二叉树（BST）"><a href="#搜索二叉树（BST）" class="headerlink" title="搜索二叉树（BST）"></a>搜索二叉树（BST）</h1><h2 id="定义节点"><a href="#定义节点" class="headerlink" title="定义节点"></a>定义节点</h2><p>首先定义节点，传入节点存储数据，以及其左子树长子节点与其右子树长子节点，一个返回实例节点数据的函数。</p>
+<pre><code>function Node(data, left, right) {
+    this.data = data
+    this.right = right
+    this.left = left
+    this.show = show
+}
+
+function show() {
+    return this.data
+}
+</code></pre><h2 id="定义搜索二叉树"><a href="#定义搜索二叉树" class="headerlink" title="定义搜索二叉树"></a>定义搜索二叉树</h2><p>定义搜索二叉树，初始化根节点为null，定义插入节点函数，定义删除节点函数，定义遍历函数（中序，前序，后序），定义查找函数，定义获取最大、最小节点数据函数。</p>
+<pre><code>function BST() {
+    this.root = null
+    this.insert = insert
+    this.inOrder = inOrder
+    this.preOrder = preOrder
+    this.postOrder = postOrder
+    this.find = find
+    this.getMin = getMin
+    this.getMax = getMax
+    this.remove = remove
+}
+</code></pre><h2 id="向搜索二叉树中插入节点"><a href="#向搜索二叉树中插入节点" class="headerlink" title="向搜索二叉树中插入节点"></a>向搜索二叉树中插入节点</h2><p>首先创建一个新节点，将数据保存到该节点；<br>然后查找BST中是否拥有根节点，如果没有，那就是一颗新树，该节点就是根节点，如果该节点不是根节点，就需要遍历BST，找到适当插入节点的位置。<br>插入节点的算法：<br>（1）设根节点为当前节点。<br>（2）如果待插入节点保存的数据小于当前节点，则设新的当前节点为原节点的左节点；反之执行第四步。<br>（3）如果当前节点为空，就将新的节点插入这个位置，退出循环；反之，继续执行下次循环。<br>（4）设新的当前节点为原节点的右节点。<br>（3）如果当前节点为空，就将新的节点插入这个位置，退出循环；反之，继续执行下次循环。</p>
+<pre><code>function insert(data) {
+    var node = new Node(data, null, null)
+    if (this.root === null) {
+        this.root = node
+    } else {
+        var current = this.root
+        var parent = null
+        while (true) {
+            parent = current
+            if (data &lt; current.data) {
+                current = current.left
+                if (current === null) {
+                    parent.left = node
+                    break
+                }
+            } else {
+                current = current.right
+                if (current === null) {
+                    parent.right = node
+                    break
+                }
+            }
+        }
+    }
+}
+</code></pre><h2 id="BST遍历"><a href="#BST遍历" class="headerlink" title="BST遍历"></a>BST遍历</h2><p>无论哪种遍历方法，都是采用递归。</p>
+<h4 id="中序"><a href="#中序" class="headerlink" title="中序"></a>中序</h4><p>总结三个字，就是<code>左根右</code>。</p>
+<pre><code>function inOrder(node) {
+    if (!(node === null)) {
+        inOrder(node.left)
+        console.log(node.show())
+        inOrder(node.right)
+    }
+}
+</code></pre><h4 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h4><p>总结三个字，就是<code>根左右</code>。</p>
+<pre><code>function preOrder(node) {
+    if (!(node === null)) {
+        console.log(node.show())
+        preOrder(node.left)
+        preOrder(node.right)
+    }
+}
+</code></pre><h4 id="后序"><a href="#后序" class="headerlink" title="后序"></a>后序</h4><p>总结三个字，就是<code>左右根</code>。</p>
+<pre><code>function postOrder(node) {
+    if (!(node === null)) {
+        postOrder(node.left)
+        postOrder(node.right)
+        console.log(node.show())
+    }
+}
+</code></pre><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>BST通常使用的三种类型的查找，查找最小值，查找最大值，以及查找特定值。</p>
+<h4 id="查找最大值"><a href="#查找最大值" class="headerlink" title="查找最大值"></a>查找最大值</h4><p>沿着BST左子树遍历，直到最后一个叶节点，返回该叶节点的数据。</p>
+<pre><code>function getMax() {
+    var current = this.root
+    if (!(current.left === null)) {
+        current = current.left
+    }
+    return current.data
+}
+</code></pre><h4 id="查找最小值"><a href="#查找最小值" class="headerlink" title="查找最小值"></a>查找最小值</h4><p>沿着BST右子树遍历，直到最后一个叶节点，返回该叶节点的数据。</p>
+<pre><code>function getMin() {
+    var current = this.root
+    if (!(current.right === null)) {
+        current = current.right
+    }
+    return current.data
+}
+</code></pre><h4 id="查找特定值"><a href="#查找特定值" class="headerlink" title="查找特定值"></a>查找特定值</h4><p>比较该值与当前节点的数据大小，如果不等，根据大小确定遍历方向，找到该值，返回保存该值得节点，没有找到，则返回null</p>
+<pre><code>function find(data) {
+    var current = this.root
+    while (current !== null) {
+        if (current.data === data) {
+            return current
+        } else if (data &lt; current.data) {
+            current = current.left
+        } else {
+            current = current.right
+        }
+    }
+    return null
+}
+</code></pre><h2 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h2><p>BST删除方法使用删除子节点函数<code>removeNode</code></p>
+<pre><code>function remove(data) {
+    root = removeNode(this.root, data)
+}
+</code></pre><p>删除节点使用递归的方法，判断当前节点为空，则返回null。如果不为空，继而判断当前节点数据与要删除数据的大小。<br>如果相等，判断当前节点的左右子节点是否存在，都不存在，直接返回null，仅左节点存在，返回左节点，仅右节点存在，返回右节点，都存在，则沿着右子树查找最小节点，将最小节点值赋给当前要删除节点，再将右子树最小节点删除。<br>如果不等，比较当前节点数据与要删除节点数据的大小，小于，当前节点的右节点递归调用removeNode函数，传值分别为当前节点右节点，以及要删除数据。大于，当前节点的左节点递归调用removeNode函数，传值分别为当前节点左节点，以及要删除数据。</p>
+<pre><code>function removeNode(node, data) {
+    if (node === null) {
+        return null
+    }
+    if (data === node.data) {
+        if (node.left === null &amp;&amp; node.right === null) {
+            return null
+        }
+        if (node.left === null) {
+            return node.right
+        }
+        if (node.right === null) {
+            return node.left
+        }
+        var tempNode = getRightSmallest(node.right)
+        node.data = tempNode.data
+        node.right = remove(node.right, tempNode.data)
+        return node
+    } else if (data &lt; node.data) { 
+        node.left = removeNode(node.left, data)
+        return node
+    } else {
+        noderight = removeNode(node.right, data)
+        return node
+    }
+}
+</code></pre><p>其中，<code>getRightSmallest</code>为寻找右子树中最小节点函数</p>
+<pre><code>getRightSmallest(node) {
+    if (node === null) {
+        return node
+    } else {
+        return getRightSmallest(node.left)
+    }
+}
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，搜索二叉树的基本功能都用js实现了，最近在笔试中遇到了很多算法和数据结构的问题，发现前端仅仅只会”前端”是不够的，任重而道远。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
