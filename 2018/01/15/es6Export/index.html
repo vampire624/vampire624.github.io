@@ -111,7 +111,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-01-15</span>
-            <span class="time">11:38:15</span>
+            <span class="time">11:46:52</span>
           </span>
           
           <!--  Categories  -->
@@ -126,7 +126,7 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/es6/">#es6</a> <a class="tag" href="/tags/nodejs/">#nodejs</a>
+<a class="tag" href="/tags/nodejs/">#nodejs</a> <a class="tag" href="/tags/es6/">#es6</a>
 
 
           </div>
@@ -135,7 +135,8 @@
         <div class="post-content">
           <p>es6使用过程中，导出和导入模块时使用export与export default的区别。</p>
 <a id="more"></a> 
-<h1 id="export-和-export-default的区别"><a href="#export-和-export-default的区别" class="headerlink" title="export 和 export default的区别"></a>export 和 export default的区别</h1><h3 id="1-export与export-default均可用于导出常量、函数、文件、模块等"><a href="#1-export与export-default均可用于导出常量、函数、文件、模块等" class="headerlink" title="1.export与export default均可用于导出常量、函数、文件、模块等"></a>1.export与export default均可用于导出常量、函数、文件、模块等</h3><h3 id="2-你可以在其它文件或模块中通过import-常量-函数-文件-模块-名的方式，将其导入，以便能够对其进行使用"><a href="#2-你可以在其它文件或模块中通过import-常量-函数-文件-模块-名的方式，将其导入，以便能够对其进行使用" class="headerlink" title="2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用"></a>2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用</h3><h3 id="3-在一个文件或模块中，export、import可以有多个，export-default仅有一个"><a href="#3-在一个文件或模块中，export、import可以有多个，export-default仅有一个" class="headerlink" title="3.在一个文件或模块中，export、import可以有多个，export default仅有一个"></a>3.在一个文件或模块中，export、import可以有多个，export default仅有一个</h3><h3 id="4-通过export方式导出，在导入时要加-，export-default则不需要"><a href="#4-通过export方式导出，在导入时要加-，export-default则不需要" class="headerlink" title="4.通过export方式导出，在导入时要加{ }，export default则不需要"></a>4.通过export方式导出，在导入时要加{ }，export default则不需要</h3><pre><code>1.export
+<h2 id="export-和-export-default的区别"><a href="#export-和-export-default的区别" class="headerlink" title="export 和 export default的区别"></a>export 和 export default的区别</h2><p>1.export与export default均可用于导出常量、函数、文件、模块等<br>2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用<br>3.在一个文件或模块中，export、import可以有多个，export default仅有一个<br>4.通过export方式导出，在导入时要加{ }，export default则不需要</p>
+<pre><code>1.export
 //a.js
 export const str = &quot;blablabla~&quot;;
 export function log(sth) { 
@@ -153,7 +154,7 @@ export default str;
 //b.js
 import str from &apos;a&apos;; 
 //导入的时候没有花括号
-</code></pre><h2 id="使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"><a href="#使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名" class="headerlink" title="使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"></a>使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名</h2><pre><code>//a.js
+</code></pre><h4 id="使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"><a href="#使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名" class="headerlink" title="使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"></a>使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名</h4><pre><code>//a.js
 let sex = &quot;boy&quot;;
 export default sex（sex不能加大括号）
 //原本直接export sex外部是无法识别的，加上default就可以了.但是一个文件内最多只能有一个export default。其实此处相当于为sex变量值&quot;boy&quot;起了一个系统默认的变量名default，自然default只能有一个值，所以一个文件内不能有多个export default。
@@ -162,7 +163,7 @@ import any from &quot;./a.js&quot;
 import any12 from &quot;./a.js&quot; 
 console.log(any,any12)   //boy,boy
 //本质上，a.js文件的export default输出一个叫做default的变量，然后系统允许你为它取任意名字。所以可以为import的模块起任何变量名，且不需要用大括号包含
-</code></pre><h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>export 和 export defult 困扰了我很久，今天总算是搞清楚了。啊哦。</p>
+</code></pre><h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>export 和 export defult 困扰了我很久，今天总算是搞清楚了。啊哦。</p>
 
         </div>
       </div>
