@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="vampire624">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="平衡二叉树（BST）"/>
+  <meta property="og:description" content="blog" />
+  <meta property="og:site_name" content="zhonya&#39;s Hourglass"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://vampire624.top"/>
+  
+    <link rel="alternate" href="/atom.xml" title="zhonya&#39;s Hourglass" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>zhonya's Hourglass</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106015191-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">平衡二叉树（BST）</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/vampire624">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:vampire_624@yeah.net">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By vampire624</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-04-13</span>
+            <span class="time">14:57:29</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/数据结构与算法/">数据结构与算法</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/js/">#js</a> <a class="tag" href="/tags/数据结构/">#数据结构</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>平衡二叉搜索树（Self-balancing binary search tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。平衡二叉树的常用实现方法有红黑树、AVL、替罪羊树、Treap、伸展树等。</p>
+<a id="more"></a> 
+<h1 id="平衡二叉树（AVL）"><a href="#平衡二叉树（AVL）" class="headerlink" title="平衡二叉树（AVL）"></a>平衡二叉树（AVL）</h1><p>首先平衡二叉树是一颗搜索二叉树，因此其节点、树定义与<a href="/2018/04/10/BST/" title="BST">BST</a>一致，这里仅仅就其插入操作保持自平衡来阐述。</p>
+<h2 id="保持自平衡（旋转）"><a href="#保持自平衡（旋转）" class="headerlink" title="保持自平衡（旋转）"></a>保持自平衡（旋转）</h2><p>要将不平衡的二叉搜索树转换为平衡的AVL树需要对树进行一次或多次旋转，旋转方式分为左单旋、右单旋、左-右双旋、右-左双旋。</p>
+<h4 id="左单旋"><a href="#左单旋" class="headerlink" title="左单旋"></a>左单旋</h4><p>当前节点的平衡因子（左子树深度与右子树深度相减）为-2，而其右子树的根节点平衡因子也同样为负，直接对其进行左旋转（逆时针）。</p>
+<pre><code>function rotateLeft(AvlNode) {
+    var node = AvlNode.right
+    AvlNode.right = node.left
+    node.left = AvlNode
+    return node
+}
+</code></pre><p>传入需要旋转的子树根节点AvlNode,将其右节点赋值给新节点保存起来，然后AvlNode的右节点的左节点赋值给其右节点，接着把AvlNode赋值给AvlNode的右节点的左节点。最后返回传入节点的右节点，即AvlNode的初始右节点，完成左旋。</p>
+<h4 id="右单旋"><a href="#右单旋" class="headerlink" title="右单旋"></a>右单旋</h4><p>当前节点的平衡因子（左子树深度与右子树深度相减）为2，而其右子树的根节点平衡因子也同样为正，直接对其进行右旋转（顺时针）。</p>
+<pre><code>function rotateRight(AvlNode) {
+    var node = AvlNode.left
+    AvlNode.left = node.right
+    node.right = AvlNode
+    return node
+}
+</code></pre><p>传入需要旋转的子树根节点AvlNode,将其左节点赋值给新节点保存起来，然后AvlNode的左节点的右节点赋值给其左节点，接着把AvlNode赋值给AvlNode的左节点的右节点。最后返回传入节点的左节点，即AvlNode的初始左节点，完成右旋。</p>
+<h4 id="左-右旋"><a href="#左-右旋" class="headerlink" title="左-右旋"></a>左-右旋</h4><p>单旋需要子树根节点的平衡因子符号与要旋转的根节点一致，但是当符号相反时，需要对子树根节点进行相反方向旋转，再对要旋转的根节点进行旋转。左右旋即，先对子树跟节点左旋，再对要旋转跟节点进行右旋。</p>
+<pre><code>function rotateLeftRight(AvlNode) {
+    AvlNode.left = rotateLeft(AvlNode.left)
+    return rotateRight(AvlNode)
+}
+</code></pre><h4 id="右-左旋"><a href="#右-左旋" class="headerlink" title="右-左旋"></a>右-左旋</h4><p>单旋需要子树根节点的平衡因子符号与要旋转的根节点一致，但是当符号相反时，需要对子树根节点进行相反方向旋转，再对要旋转的根节点进行旋转。右左旋即，先对子树跟节点右旋，再对要旋转跟节点进行左旋。</p>
+<pre><code>function rotateRightLeft() {
+    AvlNode.right = rotateRight(AvlNode.right)
+    return rotateLeft(AvlNode)
+}
+</code></pre><h2 id="平衡函数"><a href="#平衡函数" class="headerlink" title="平衡函数"></a>平衡函数</h2><p>对当前跟节点进行旋转平衡，首先需要一个获得当前节点深度函数<code>getAvlTreeHeight</code></p>
+<pre><code>function getAvlTreeHeight(node) {
+    if (!node) {
+        return 0
+    }
+    else {
+        //递归调用子节点深度
+        var left = getAvlTreeHeight(node.left)
+        var right = getAvlTreeHeight(node.right)
+        return Math.Max(left, right) + 1
+    }
+}
+</code></pre><p>对当前节点进行平衡处理</p>
+<pre><code>function balance(node) {
+    if (node == null) {
+        return node
+    }
+    if (getAvlTreeHeight(node.left) - getAvlTreeHeight(node.right) &gt; 1) {
+        if (getAvlTreeHeight(node.left.left) &gt;= getAvlTreeHeight(node.left.right)) {
+            //右旋
+            node = rotateRight(node)
+        } else {
+            //左-右旋
+            node = rotateLeftRight(node)
+        }
+    } else if (getAvlTreeHeight(node.right) - getAvlTreeHeight(node.left) &gt; 1) {
+        if (getAvlTreeHeight(node.right.right) &gt;= getAvlTreeHeight(node.right.left)) {
+            //左旋
+            node = rotateLeft(node)
+        } else {
+            //右-左旋
+            node = rotateRightLeft(node)
+        }
+    }
+    return node
+}
+</code></pre><p>在<a href="/2018/04/10/BST/" title="BST">平衡二叉树</a>的基础上，我们对插入操作进行修改。</p>
+<pre><code>function insert(data) {
+    var node = new Node(data, null, null)
+    if (this.root == null) {
+        this.root = node 
+    } else {
+        this.root = insertNode(this.root, node)
+    }
+}
+</code></pre><p>插入函数如上，新建节点，左右节点赋空，数据为传入的数据，根节点为空，则新节点为根节点，根节点部位空，执行插入节点函数<code>insertNode</code>操作。</p>
+<pre><code>function insertNode(fatherNode, newNode) {
+    if (newNode.data &lt; fatherNode.data) {
+        if (fatherNode.left == null) {
+            fatherNode.left = newNode
+            return fatherNode
+        } else {
+            fatherNode.left = insertNode(fatherNode.left, newNode)
+            //平衡父节点
+            fatherNode = balance(fatherNode)
+            return fatherNode
+        }
+    } else if (newNode.data &gt; fatherNode.data) {
+        if (fatherNode.right == null) {
+            fatherNode.right = newNode
+            return fatherNode
+        } else {
+            fatherNode.right = insertNode(fatherNode.right, newNode)
+            //平衡父节点
+            fatherNode = balance(fatherNode)
+            return fatherNode
+        }
+    }
+}
+</code></pre><p>在每次插入节点后，递归调用对父节点的平衡函数，来保持每次插入操作之后整棵树的平衡。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
